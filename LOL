@@ -1,24 +1,57 @@
-local LocalPlayer = game:GetService("Players").LocalPlayer
-game:GetService("Workspace").Balls.ChildAdded:Connect(function(child)
-    local trackTask = task.spawn(function()
-        local ball = child
-        while task.wait() do
-            if string.find(ball.BrickColor.Name:lower(), "red") then
-                print("Found parry target")
-                while LocalPlayer:DistanceFromCharacter(ball.CFrame.Position)
-> getgenv().ScriptConfig.DistanceBeforeParry do
-                        task.wait()
-                end
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Key system Join to disk ", HidePremium = false, SaveConfig = false, introEnable = false})
 
-                print("Parrying...")
+OrionLib:MakeNotification({
+	Name = "Key tags",
+	Content = "TYMS FOR USE MY SCRIPT",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+_G.key = "MNWFNAJFNAFWF9AN2"
+_G.keyImput = "String"
 
-                local ReplicatedStorage = game:GetService("ReplicatedStorage")
-                ReplicatedStorage.Remotes.ParryButtonPress:Fire()
-                print("Parry attempted")
-            end
+local Tab = Window:MakeTab({
+	Name = "Key System",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+function CorrectKeyNotification()
+    OrionLib:MakeNotification({
+        Name = "Key Correct",
+        Content = "You Have Accest for my script",
+        Image = "rbxassetid://4483345998",
+        Time = 5
+    })
+end
+
+function inCorrectKeyNotification()
+    OrionLib:MakeNotification({
+        Name = "inKey Correct",
+        Content = "You  no Have Accest for my script, Please put The key correct",
+        Image = "rbxassetid://4483345998",
+        Time = 5
+    })
+end
+Tab:AddTextbox({
+	Name = "Key",
+	Default = " Join Disk For key: https://discord.gg/35gXPCBmsD",
+	TextDisappear = true,
+	Callback = function(Value)
+		_G.keyImput = Value
+	end	  
+})
+Tab:AddButton({
+	Name = "Enter Key",
+	Callback = function()
+    if _G.keyImput == _G.key then
+        MakeScriptHub()
+        CorrectKeyNotification()
+    else
+        inCorrectKeyNotification()
         end
-    end)
-    child.Destroying:Connect(function()
-        task.cancel(trackTask)
-    end)
-end)
+  	end    
+})
+function MakeScriptHub()
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/Alech01/op-/main/Op%20Script%20Push%20Simulator')))()
+end
